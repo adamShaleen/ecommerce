@@ -19,7 +19,7 @@ During this project, you will solidify your understanding of the MongoDB API.  Y
 
 ##### The Domain
 
-Most companies sell some sort of product and service. For this project we will simulate building an eCommerce application.  We will build this project over the course of the next three days.
+Most companies sell some sort of product or service. For this project we will simulate building an eCommerce application.  We will build this project over the course of the next three days.
 
 Today we are going to set up our Node application, set up a basic API, add functionality to do CRUD actions with products, and create a front-end interface to be able to create, read, update, and delete products.
 
@@ -127,10 +127,10 @@ Complete the POST `/api/products` endpoint
 
 **Mongo Query**
 
-An new item query is in this format :
+A new item query is in this format :
 `db.[collectionName].save(newObj, function(err, response){})`
 
-It's pretty standard to have the client to send us the item they want to save in the correct format.  To do this they use the body.
+It's pretty standard to have the client send us the item they want to save in the correct format.  To do this they use the body.
 Pass the body into the query as the newObj.
 
 (Hint: Body is accessed by calling `req.body` because we set up bodyParser earlier in our app.  If it's empty your error is probably an incorrect setup of bodyParser.)
@@ -169,7 +169,7 @@ For each of these steps we're going to use our db object we made when we set up 
 
 **Mongo Query**
 
-A find multiple items query is in this format :
+Find multiple items query in this format :
 `db.[collectionName].find({}, function(err, response){})`
 
 The empty object means we have no criteria. and we just want all the records in [collectionName].  
@@ -252,17 +252,15 @@ If we have no err then return our result.  Just to make sure it's valid json use
 ####
 **code**
 ```
-app.get('/api/products/:id', function(req, res){
-	var idObj = {
-		_id: req.params.id
-	};
-	db.products.findOne(idObj, function(err, response){
-		if(err) {
-			res.status(500).json(err);
-		} else {
-			res.json(response);
-		}
-	});
+app.get('/api/products/:id', function(request, response, next){
+ var idObject = {_id: mongo.ObjectID(request.params.id)};
+   ecommerce.findOne(idObject, function(error, response1){
+       if(error) {
+           response.status(500).json(error);
+       } else {
+           response.json(response1);
+       }
+   });
 });
 
 ```
@@ -296,9 +294,6 @@ If we have no err then return our result.  Just to make sure it's valid json use
 **code**
 ```
 app.put('/api/products/:id', function(req, res){
-	if(!req.params.id){
-		return res.status(400).send('id query needed');
-	}
 	var query = {
 		_id: mongo.ObjectId(req.params.id)
 	};
@@ -339,9 +334,6 @@ If we have no err then return our result.  Just to make sure it's valid json use
 **code**
 ```
 app.delete('/api/products/:id', function(req, res){
-	if(!req.params.id){
-		return res.status(400).send('id query needed');
-	}
 	var query = {
 		_id: mongo.ObjectId(req.params.id)
 	};
