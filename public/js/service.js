@@ -35,4 +35,25 @@ this.removeProduct = function(product) {
 };
 
 
+this.login = function(login) {
+    return $http ({
+        method: "POST",
+        url: "/api/login",
+        data: login
+    }).then(function(response) {
+        return response.data;
+    });
+};
+
+this.updateUser = function(user) {
+    return $http ({
+        method: "PUT",
+        url: "/api/users/" + user._id,
+        data: user
+    }).then(function(response) {
+        return response.data;
+    });
+};
+
+
 });  // closing tag

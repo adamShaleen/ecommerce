@@ -18,7 +18,7 @@ During this project you will use Mongoose to create relationships between multip
 
 ## The Domain
 
-Today you are going to create two new schemas, one for Orders and one for Carts.  You are also going to create a relationship between Carts and Products using a reference, a relationship betwen Orders and Products using embedding, and a relationship between Orders and Users using reference.
+Today you are going to create two new schemas, one for Orders and one for Carts.  You are also going to create a relationship between Carts and Products using a reference, a relationship between Orders and Products using embedding, and a relationship between Orders and Users using reference.
 
 ### Step 1: Create new Schemas: Orders & Carts
 
@@ -28,7 +28,7 @@ Create a schema for carts.  Add whatever fields you feel it might need.  *Carts 
 
 Once you've created your schema, export it (NOT as a model).  Then go to your User model and use the cart schema for the User's cart field.
 
-*Note*:  This may seem confusing.  Technically, you could just define the new fields in the User's schema.  But it's important to know that a schema is just a pattern or blueprint to follow.  It can be used in multiple models.  For clarification on the difference between a schema and a model see [this SO post](http://stackoverflow.com/questions/22950282/schema-vs-model).
+*Note*:  This may seem confusing.  Technically, you could just define the new fields in the User's schema.  But it's important to know that a schema is just a pattern or blueprint to follow.  It can be used in multiple models.  For clarification on the difference between a schema and a model see (http://stackoverflow.com/questions/22950282/schema-vs-model).
 
 **Breakpoint**: You should be able to spin up your server without any errors.  You should also be able to test that your new Order model and new cart schema are working.  You can either create a dummy endpoint and hook it up to your models, or write a script in your server.js file and run it on server load.  Test and make sure that you can create new Orders and add items to a user's cart.
 

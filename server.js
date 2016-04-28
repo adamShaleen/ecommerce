@@ -3,7 +3,10 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 // var mongo = require('mongojs');
 var mongoose = require("mongoose");
-var product = require("./product");
+var Product = require("./product.js");
+var Order = require("./order.js");
+var User = require("./user.js");
+var Cart = require("./cart.js");
 var productController = require("./productController");
 var Schema = mongoose.Schema;
 var app = express();
@@ -34,6 +37,20 @@ app.get("/api/products/:id", productController.displayProductsById);
 app.put("/api/products/:id", productController.updateProductsById);
 
 app.delete("/api/products/:id", productController.deleteProductsById);
+
+// Below is all step 3 endpoints
+
+app.post("/api/order", productController.addOrder);
+
+app.get("/api/order", productController.displayOrder);
+
+app.post("/api/cart/:userId", productController.addCart);
+
+app.post("/api/login", productController.login);
+
+app.put("/api/users/:id", productController.updateUser);
+
+
 
 // ALL THESE ENDPOINTS ARE FOR MONGO-------------------------------------
 // app.post('/api/products', function(request, response, next) {

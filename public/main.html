@@ -2,7 +2,7 @@
 </div>
 <div class="outer">
 <div class="main_product_container">
-    <h1 style="text-decoration: underline">Can You Dig It Webstore</h1>
+    <img class="logo" src="http://i0.wp.com/canyoudigitbmx.com/wp-content/uploads/2015/09/cydi1.png?fit=400%2C200"></img>
     <br>
         <input ng-model="search" placeholder="Product filter"></input>
         <br>
@@ -14,11 +14,18 @@
 </div>
 
 <div class="shopping_cart">
+    <div class="user_container">
+    <h1>User Info</h1>
+    <input ng-model="login.email"placeholder="User Name"></input>
+    <input ng-model="login.password" placeholder="Password"></input>
+    <button ng-click="signIn(login)">Login</button><br>
+    <p>User Name: {{user.name}}</p>
+    </div>
     <h1>Shopping Cart</h1>
     <br>
     <button ng-click="deleteCart()">Empty cart</button><button>Checkout</button>
     <br>
-    <div class="shopping_cart_items"><p ng-repeat="product in cart track by $index">Item: {{product.title}} ${{product.price}}</p></div><br>
+    <div class="shopping_cart_items"><p ng-repeat="product in cart track by $index">Item: {{product.id.title}} ${{product.id.price}}</p></div><br>
     <div><p class="emptyMessage">{{empty}}</p><br></div>
     <div class="total"><h3>Total ${{total}}</h3></div>
 </div>
