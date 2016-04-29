@@ -6,27 +6,38 @@
     <br>
         <input ng-model="search" placeholder="Product filter"></input>
         <br>
-        <button ng-click="addToCart(selected)">Add to cart</button>
+        <button ng-show="toggle" ng-click="addToCart(selected)">Add to cart</button>
         <br>
             <div ng-class="{highlight: selected === product}" class="products" ng-repeat="product in products | filter: search" ng-click="onClick(product)">
-                <p>Item: {{product.title}} <br>Description: {{product.description}} <br>Price: ${{product.price}}</p>
+                <p>{{product.title}} <br>Description: {{product.description}} <br>Price: ${{product.price}}</p>
             </div>
 </div>
 
-<div class="shopping_cart">
+<div class="user_and_cart_container">
     <div class="user_container">
-    <h1>User Info</h1>
-    <input ng-model="login.email"placeholder="User Name"></input>
-    <input ng-model="login.password" placeholder="Password"></input>
-    <button ng-click="signIn(login)">Login</button><br>
-    <p>User Name: {{user.name}}</p>
+        <div ng-hide="toggle" class="newUser">
+            <h1>Create Login</h1>
+            <input type="text" placeholder="Email"></input> <input type="password" placeholder="Password"></input>
+            <button>Submit</button>
+        </div>
+        <div ng-hide="toggle" class="currentLogin">
+            <h1>Existing Users</h1>
+            <input ng-model="login.email"placeholder="Email"></input>
+            <input type="password" ng-model="login.password" placeholder="Password"></input>
+            <button ng-click="signIn(login)" ng-model="toggle">Login</button><br>
+        </div>
+        <div ng-show="toggle" class="currentUser">
+            <h3>{{user.name}} is logged in</h3>
+        </div>
+
+        <div class="shoppingCart">
+            <h1>Shopping Cart</h1>
+            <br>
+            <button ng-click="deleteCart()">Empty cart</button><button>Checkout</button>
+            <br>
+        <div class="shopping_cart_items"><p ng-repeat="product in cart track by $index">{{product.id.title}} ${{product.id.price}}</p></div><br>
+            <div><p class="emptyMessage">{{empty}}</p><br></div>
+        </div>
+        <div class="total"><h1>Order Total ${{total}}</h1></div>
     </div>
-    <h1>Shopping Cart</h1>
-    <br>
-    <button ng-click="deleteCart()">Empty cart</button><button>Checkout</button>
-    <br>
-    <div class="shopping_cart_items"><p ng-repeat="product in cart track by $index">Item: {{product.id.title}} ${{product.id.price}}</p></div><br>
-    <div><p class="emptyMessage">{{empty}}</p><br></div>
-    <div class="total"><h3>Total ${{total}}</h3></div>
-</div>
-</div>
+    </div>

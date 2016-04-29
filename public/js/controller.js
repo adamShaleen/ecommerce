@@ -38,13 +38,15 @@ $scope.removeProduct = function(product) {
     });
 };
 
+$scope.toggle = false;
 
 // login function
-$scope.login = {email: "adam@email.com", password: "go"};
+$scope.login = {email: "adamshaleen@gmail.com", password: "password"};  // remove this once ready to go
 $scope.signIn = function(login) {
     service.login(login).then(function(response) {
         console.log(response);
         $scope.user = response;
+        $scope.toggle = !$scope.toggle;
         $scope.cart = response.cart[0].products;
         $scope.total = $scope.cart.reduce(
             function(prev, cur){
